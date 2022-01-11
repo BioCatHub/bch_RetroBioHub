@@ -4,7 +4,11 @@ This route handles the requests send by retrobiocat and distributes it
 
 
 from flask_restx import Resource, Namespace, Model, fields
+
 from Models.retrobiocat_query_payload import PayloadRetrobiocat
+from retrobiohub.retrobiocat_biocathub_mapper.retrobiocat_biocathub_mapper import RetrobiocatBiocathubMapper
+from Models.parser_for_planning import Retrobiocat_model as rbc_model
+
 
 ns = Namespace("Request Handler", description="Routes handling Requests from Retrobiocat")
 
@@ -20,8 +24,12 @@ class RequestHandler(Resource):
     '''
     @ns.doc(body=model, model=model)
     def post(self):
+
+        new = RetrobiocatBiocathubMapper(rbc_model)
+        payload = new.map_reactions_to_enzymes()
+
     
-        return "success"
+        return payload
 
 class ResponseHeader(Resource):
     '''
@@ -35,33 +43,3 @@ class ResponseHeader(Resource):
 ns.add_resource(RequestHandler, "/retrobiocat")
 ns.add_resource(ResponseHeader, "/res")
 
-
-
-
-
-
-'''
-experiment = {
-    "name": fields.String,
-    "enzyme": fields.String
-}
-
-experimentModel = Model(experiment)
-
-user_fields = ns.model("User", {
-    "name": fields.String,
-    "id":fields.String
-})
-
-user = ns.model("UserData", {
-    "identity": fields.Nested(user_fields)
-})
-
-ns.add_model("Reaction", Reaction)
-experimentSwagger = ns.add_model("experimentModel",{"name":fields.String})
-
-
-reaction = ns.model("Experiment", {"name":fields.String})
-
-
-'''
