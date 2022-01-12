@@ -1,6 +1,5 @@
 
 from Models.biocathub_model_pydantic import Reactant, Reactantcls, Reaction, Reactioncls
-from Models.parser_for_planning import Retrobiocat_model as RBM
 
 
 class ReactionMapper:
@@ -35,12 +34,3 @@ class ReactionMapper:
         
         print(new.dict())
 
-
-
-
-new = ReactionMapper(RBM)
-
-#new.map_products()
-#new.map_reactants()
-
-new.map_reaction()

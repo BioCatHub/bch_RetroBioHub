@@ -14,8 +14,8 @@ api = Api(app, title="RetroBioHub Microservice")
 CORS(app,resources={r'/*':{'origins': '*'}} )
 
 
-api.add_namespace(ns, "/api")
+api.add_namespace(ns, "/")
 
 if __name__ == "__main__":
-    app.run(debug=True) #
+    app.run() #
 

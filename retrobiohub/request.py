@@ -31,15 +31,5 @@ class RequestHandler(Resource):
     
         return payload
 
-class ResponseHeader(Resource):
-    '''
-    Test Instance this class will be removed in the near future
-    '''
-    @ns.doc(body=model)
-    def get(self):
-        return "444"
-
-
 ns.add_resource(RequestHandler, "/retrobiocat")
-ns.add_resource(ResponseHeader, "/res")
 

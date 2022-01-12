@@ -20,12 +20,15 @@ class RetrobiocatBiocathubMapper:
         self.rbc_model = rbc_model
 
     def map_reactions_to_enzymes(self):
-        
-        reactions = ReactionMapper(self.rbc_model).map_reaction()
-        enzyme = Enzyme.from_orm(Enzymecls(self.rbc_model["enzyme"], reactions))
-        
 
-        return enzyme.dict()
+        enzymes = []
+        for i in self.rbc_model:
+            reactions = ReactionMapper(i).map_reaction()
+            enzyme = Enzyme.from_orm(Enzymecls(i["enzyme"], reactions))
+            enzyme_dict = enzyme.dict()
+            enzymes.append(enzyme_dict)
+        
+        return enzymes
         
 
     
