@@ -11,7 +11,7 @@ ENV FLASK_RUN_HOST 0.0.0.0
 EXPOSE 5000
 #ENV FLASK_RUN_PORT 5050
 
-COPY /requirements.txt /requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 
