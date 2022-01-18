@@ -31,5 +31,5 @@ class RequestHandler(Resource):
     
         return payload
 
-ns.add_resource(RequestHandler, "/retrobiocat")
+ns.add_resource(RequestHandler, "/")
 
