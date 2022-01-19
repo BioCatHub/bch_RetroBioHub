@@ -17,5 +17,5 @@ CORS(app,resources={r'/*':{'origins': '*'}} )
 api.add_namespace(ns, "/retrobiohub")
 
 if __name__ == "__main__":
-    app.run() #
+    app.run(debug=True) #
 
