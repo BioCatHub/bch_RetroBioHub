@@ -19,7 +19,7 @@ class MiniMongo:
         pw = "Minimongo333!!!"
         UN = "MiniMongoAccessor"
 
-        client = pymongo.MongoClient("mongodb+srv://MiniMongoAccessor:Minimongo333!!!@cluster0.cgs1w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        client = pymongo.MongoClient('mongodb+srv://MiniMongoAccessor:Minimongo333!!!@cluster0.cgs1w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
         return client
 
