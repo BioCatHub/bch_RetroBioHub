@@ -15,33 +15,25 @@ from retrobiohub.retrobiocat_biocathub_mapper.retrobiocat_biocathub_mapper impor
 import retrobiohub.mini_mongo_adapter as MiniMongo 
 
 
-ns = Namespace("Request Handler", description="Routes handling Requests from Retrobiocat")
+ns = Namespace("Mini Mongo query", description="Queries MiniMongo")
 
 
-modelExperiment = PayloadRetrobiocat().define_reaction()
-
-model = ns.model("Experiment", modelExperiment)
 
 
 class RequestHandler(Resource):
     '''
     Test Instance this class will be removed in the near future
     '''
-    @ns.doc(body=model, model=model)
+    @ns.doc()
     def post(self):
 
-        rbc_model = request.get_json()
-        new = RetrobiocatBiocathubMapper()
-        
-        payload = new.map_reactions_to_enzymes()
-
         db = MiniMongo.MiniMongo()
-        
-        
-        #db.get_collection()
-        id = db.push_document(payload)
-        print("die id ist:", id)
-        res = json.dumps({"payload":payload, "id":str(id)})
+        entry = db.get_collection_by_id("hallo")
+        print("der entry ist", entry)
+        name = entry["name"]
+        print(name)
+
+        res = "Minimongo"
         return res
 
 ns.add_resource(RequestHandler, "/")

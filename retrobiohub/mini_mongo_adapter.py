@@ -1,5 +1,7 @@
 import pymongo
 
+from bson import ObjectId
+import json
 
 
 class MiniMongo:
@@ -7,9 +9,6 @@ class MiniMongo:
         This class builds the connection to the Mini Mongo database, used for short lived sotrage of data from Retrobiocat
 
     '''
-
-    def __init__(self, payload):
-        self.payload = payload
 
     def mongo_connection(self):
         '''
@@ -32,16 +31,43 @@ class MiniMongo:
         for i in payload:
             print(i)
 
-    def push_document(self):
+    def get_collection_by_id(self, id):
+        ''' 
+            extract entries from the MiniMongo database based on a submitted id 
+            ---
+            args:
+                id: String; MiniMongo id to be queried
+            returns:
+                payload: dict; database entry
         '''
-            writes the created biocathub_model to the MoniMongo Database
+
+        newId = ObjectId('61e7df884277a4aa22125ae7')
+        print("die id ist:", newId)
+
+        client = self.mongo_connection()
+        db = client["Minimongo"]
+        collection = db["retrobiohub"]
+        extract = collection.find_one({'_id':newId})
+        print("der extract ist", extract)
+
+        return extract
+
+    def push_document(self, payload):
+        '''
+            mappes the retrobiocat model to the BioCatHub model and writes it to the MoniMongo Database
+            ---
+            args:
+            payload: dict; Retrobiocat object to be mapped to a BioCatHub enzyme object.
+            ---
+            returns:
+            id: json; object containing the database entry id of the previously stored object
         '''
 
         client = self.mongo_connection()
         db = client["Minimongo"]
         collection = db["retrobiohub"]
 
-        post = {"experiment":self.payload}
+        post = {"experiment":payload}
         upload = collection.insert_one(post)
         id = upload.inserted_id
         return id
