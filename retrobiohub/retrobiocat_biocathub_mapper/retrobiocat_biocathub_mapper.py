@@ -23,8 +23,8 @@ class RetrobiocatBiocathubMapper:
 
         enzymes = []
         for i in self.rbc_model:
-            reactions = ReactionMapper(i).map_reaction()
-            enzyme = Enzyme.from_orm(Enzymecls(i["enzyme"], reactions))
+            reaction = ReactionMapper(i).map_reaction()
+            enzyme = Enzyme.from_orm(Enzymecls(i["enzyme"], reaction))
             enzyme_dict = enzyme.dict()
             enzymes.append(enzyme_dict)
         

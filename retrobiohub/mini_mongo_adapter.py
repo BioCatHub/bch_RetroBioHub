@@ -41,7 +41,7 @@ class MiniMongo:
                 payload: dict; database entry
         '''
 
-        newId = ObjectId('61e7df884277a4aa22125ae7')
+        newId = ObjectId(id)
         print("die id ist:", newId)
 
         client = self.mongo_connection()

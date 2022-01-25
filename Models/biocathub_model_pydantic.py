@@ -9,14 +9,16 @@ from pydantic import BaseModel
 class Reactant(BaseModel):
     role:str
     smiles:str
+    name:str
     
     class Config:
         orm_mode = True
 
 class Reactantcls:
-    def __init__(self, role:str, smiles:str):
+    def __init__(self, role:str, smiles:str, name:str):
         self.role = role
         self.smiles = smiles
+        self.name = name
 
 
 # Defining the Reaction ****************************************
@@ -40,15 +42,15 @@ class Reactioncls:
 
 class Enzyme(BaseModel):
     name: str
-    reactions:Reaction
+    reaction:Reaction
 
     class Config:
         orm_mode=True
 
 class Enzymecls:
-    def __init__(self, name, reactions):
+    def __init__(self, name, reaction):
         self.name = name
-        self.reactions = reactions
+        self.reaction = reaction
 
 
 

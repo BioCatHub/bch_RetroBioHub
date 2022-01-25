@@ -28,13 +28,13 @@ class RequestHandler(Resource):
     def post(self):
 
         db = MiniMongo.MiniMongo()
-        entry = db.get_collection_by_id("hallo")
-        print("der entry ist", entry)
-        name = entry["name"]
-        print(name)
+        entry = db.get_collection_by_id("61f01e4f350839ec84eb0986")
+        print(entry)
+        response = entry["experiment"]
+
 
         res = "Minimongo"
-        return res
+        return response
 
 ns.add_resource(RequestHandler, "/")
 
