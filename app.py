@@ -16,7 +16,7 @@ CORS(app,resources={r'/*':{'origins': '*'}} )
 
 
 api.add_namespace(ns, "/retrobiohub")
-api.add_namespace(mini_mongo_query, "/minimongo")
+api.add_namespace(mini_mongo_query, "/retrobiohub/minimongo")
 
 if __name__ == "__main__":
     app.run(debug=True) #
