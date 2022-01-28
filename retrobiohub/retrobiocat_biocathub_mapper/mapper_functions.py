@@ -29,7 +29,11 @@ class ReactionMapper:
 
         educts_list = []
         for i in self.rbc_model["substrates"]:
-            iupac = self.query_iupac_by_smiles(i)
+            if self.query_iupac_by_smiles(i) == None: # TODO #15
+                iupac="not given"
+            else: 
+                iupac = self.query_iupac_by_smiles(i)
+            print("The iupac name ist", iupac)
             new = Reactant.from_orm(Reactantcls("substrate", i, iupac))
             educts_list.append(new)
             return educts_list
@@ -41,7 +45,11 @@ class ReactionMapper:
 
         products_list = []
         for i in self.rbc_model["products"]: #TODO #11
-            iupac = self.query_iupac_by_smiles(i)
+            if self.query_iupac_by_smiles(i) == None:
+                iupac="not given"
+            else: 
+                iupac = self.query_iupac_by_smiles(i)
+                iupac="not given"
             new = Reactant.from_orm(Reactantcls("product", i, iupac))
             products_list.append(new)
         return products_list
