@@ -1,19 +1,30 @@
-import requests
+import pubchempy as pcp
+import urllib
 
-r = requests.get('https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/NC(O)C(=O)c1ccccc1/json')
 
-#print(r.json())
+#p = pcp.get_properties('IsomericSMILES', 'CC', searchtype='superstructure')
 
-payload = r.json()
 
-namespace = payload["PC_Compounds"]
+try:
 
-for i in namespace:
-    extractor = i["props"]
-    for j in extractor:
-        #print(j["urn"])
-        label = j["urn"]
-        if label["label"] == "IUPAC Name":
-            print (j["value"]["sval"])
+    p = pcp.get_compounds('CCC', 'smiles')
 
-#print(namespace)
+    for i in p:
+        #print(i.iupac_name)
+        #print(i.inchikey)
+        
+        if i.iupac_name != None and i.iupac_name !="" and isinstance(i.iupac_name, str):
+            print("i is numer:", p.index(i))
+            print(i.iupac_name)
+            break
+            
+        else:
+            print("i is numer:", p.index(i))
+            print("Smiles code not found")
+
+except pcp.BadRequestError as err:
+    print("substance not known")
+
+
+
+
