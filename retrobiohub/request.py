@@ -31,7 +31,7 @@ class RequestHandler(Resource):
     def post(self):
 
         rbc_model = request.get_json()
-        print(rbc_model)
+        print("retrobiocatmodel ist:", rbc_model)
         new = RetrobiocatBiocathubMapper(rbc_model)
         
         payload = new.map_reactions_to_enzymes()

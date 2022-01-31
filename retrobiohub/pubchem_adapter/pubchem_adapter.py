@@ -1,3 +1,6 @@
+import pubchempy as pcp
+import urllib
+
 import requests
 
 
@@ -23,9 +26,9 @@ class PubchemAdapter:
 
 
     
-    def get_IUPAC_form_smiles(self, SMILES):
+    def get_IUPAC_form_smiles(self, smiles):
         '''
-            This function is used to query pubchem with a SMILES code and retrieve a IUPAC name
+            This function is used to query pubchem via pubchempy with a SMILES code and retrieve a IUPAC name
         ----------
         args:
             SMILES: String; the SMILES code of the structure to be queried
@@ -34,23 +37,16 @@ class PubchemAdapter:
             IUPAC: String;  IUPAC name of the structure queried
 
         '''
-        base_smiles = 'compound/smiles/'
-        spec_smiles = SMILES
-        return_format = '/json'
+        try:
 
-        query = base_smiles + spec_smiles + return_format
-        payload = self.pubchem_connector(query).json()
-        namespace = payload["PC_Compounds"]
+            p = pcp.get_compounds(smiles, 'smiles')
+            for i in p:                
+                if i.iupac_name != None and i.iupac_name !="" and isinstance(i.iupac_name, str):
+                    return i.iupac_name
+                
+                return i.iupac_name
+        except pcp.BadRequestError as err :
+            return "Smiles code can't be identified"
 
-        for i in namespace:
-            extractor = i["props"]
-            for j in extractor:
-                #print(j["urn"])
-                label = j["urn"]
-                if label["label"] == "IUPAC Name":
-                    iupac = j["value"]["sval"]
-                    print (j["value"]["sval"])
-                    return iupac
-                break
                     
 
