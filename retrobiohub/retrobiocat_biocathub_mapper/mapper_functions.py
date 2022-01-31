@@ -40,6 +40,7 @@ class ReactionMapper:
 
         products_list = []
         for i in self.rbc_model["products"]: #TODO #11
+            print(i)
             new = Reactant.from_orm(Reactantcls("product", i, self.query_iupac_by_smiles(i)))
             products_list.append(new)
         return products_list

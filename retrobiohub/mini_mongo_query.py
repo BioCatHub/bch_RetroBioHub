@@ -28,7 +28,7 @@ class RequestHandler(Resource):
     def post(self):
 
         db = MiniMongo.MiniMongo()
-        entry = db.get_collection_by_id("61f01e4f350839ec84eb0986")
+        entry = db.get_collection_by_id("61ed3b2c1c97376beba509f0")
         print(entry)
         response = entry["experiment"]
 

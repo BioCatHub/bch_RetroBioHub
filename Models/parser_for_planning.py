@@ -17,7 +17,7 @@ Retrobiocat_model = [{
     ],
     "reaction": "Secondary amine deamination",
     "substrates": [
-        "CC(N)c1ccccc1"
+        "CC(N)c((((((1ccccc1"
     ]
 },
     {
