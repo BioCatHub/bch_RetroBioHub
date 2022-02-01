@@ -23,8 +23,9 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
         # Install the package using the setup.py
-      - name: Install package
-        run: python setup.py install
+      - name: Install requirements
+        run: pip3 install requirements.txt
+        
         # Install pytest (you can use some other testing utility)
       - name: Install pytest
         run: |
