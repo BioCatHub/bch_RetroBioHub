@@ -14,23 +14,12 @@ jobs:
         # Checkout the latest code from the repo
       - name: Checkout repo
         uses: actions/checkout@v2
-        # Setup which version of Python to use
-      - name: Set Up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
         # Display the Python version being used
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
         # Install the package using the setup.py
       - name: Install requirements
         run: pip3 install -r Requirements.txt
-        
-        # Install pytest (you can use some other testing utility)
-      - name: Install pytest
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest
         # Run the tests. I'm using pytest and the file is in the tests directory.
       - name: Run tests
         run: pytest *
