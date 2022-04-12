@@ -27,8 +27,9 @@ class RequestHandler(Resource):
     @ns.doc()
     def post(self):
 
+        id=request.get_json()
         db = MiniMongo.MiniMongo()
-        entry = db.get_collection_by_id("61f86f06a1c2a5b08e6f5918")
+        entry = db.get_collection_by_id(id)
         print(entry)
         response = entry["experiment"]
 

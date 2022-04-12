@@ -28,7 +28,7 @@ class ReactionMapper:
     def map_reactants(self):
 
         educts_list = []
-        for i in self.rbc_model["substrates"]:
+        for i in self.rbc_model["substrates"]:   
             new = Reactant.from_orm(Reactantcls("substrate", i, self.query_iupac_by_smiles(i)))
             educts_list.append(new)
             return educts_list

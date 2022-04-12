@@ -43,9 +43,14 @@ class PubchemAdapter:
             for i in p:                
                 if i.iupac_name != None and i.iupac_name !="" and isinstance(i.iupac_name, str):
                     return i.iupac_name
+
+                elif i.iupac_name == None:
+                    raise
                 
-                return i.iupac_name
+                #return i.iupac_name
         except pcp.BadRequestError as err :
+            return "Smiles code can't be identified"
+        except Exception as err:
             return "Smiles code can't be identified"
 
                     
