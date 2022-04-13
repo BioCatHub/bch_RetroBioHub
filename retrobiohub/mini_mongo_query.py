@@ -27,15 +27,20 @@ class RequestHandler(Resource):
     @ns.doc()
     def post(self):
 
-        id=request.get_json()
-        db = MiniMongo.MiniMongo()
-        entry = db.get_collection_by_id(id)
-        print(entry)
-        response = entry["experiment"]
+        try:
+            id=request.get_json()
+            print(id["name"])
+            db = MiniMongo.MiniMongo()
+            entry = db.get_collection_by_id(id["name"])
+            print(entry)
+            response = entry["experiment"]
 
 
-        res = "Minimongo"
-        return response
+            res = "Minimongo"
+            return response
+        except Exception as err:
+
+            return {"status":"not found"}
 
 ns.add_resource(RequestHandler, "/")
 
