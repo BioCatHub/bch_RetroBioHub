@@ -29,9 +29,9 @@ class RequestHandler(Resource):
 
         try:
             id=request.get_json()
-            print(id["id"])
+            print(id["id_rbh"])
             db = MiniMongo.MiniMongo()
-            entry = db.get_collection_by_id(id["id"])
+            entry = db.get_collection_by_id(id["id_rbh"])
             print(entry)
             response = entry["experiment"]
 
