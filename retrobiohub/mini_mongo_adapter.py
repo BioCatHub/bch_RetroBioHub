@@ -16,9 +16,14 @@ class MiniMongo:
         '''
 
         pw = "Minimongo333!!!"
-        UN = "MiniMongoAccessor"
+        un = "MiniMongoAccessor"
 
         client = pymongo.MongoClient('mongodb+srv://MiniMongoAccessor:Minimongo333!!!@cluster0.cgs1w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&authSource=admin')
+
+        '''
+
+        client = pymongo.MongoClient('mongodb+srv://{}:{}!!!@cluster0.cgs1w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&authSource=admin'.format(un, pw))
+        '''
 
         return client
 
@@ -69,5 +74,13 @@ class MiniMongo:
 
         post = {"experiment":payload}
         upload = collection.insert_one(post)
-        id = upload.inserted_id
-        return id
+        try:
+            id = upload.inserted_id
+            print(id)
+            id_string = str(id)
+            return id_string
+        except Exception as error:
+            print("HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALLO")
+            id = upload.inserted_id
+            id_string = str(id)
+            return id_string

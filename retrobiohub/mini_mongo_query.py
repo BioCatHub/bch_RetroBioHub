@@ -27,8 +27,11 @@ class RequestHandler(Resource):
     @ns.doc()
     def post(self):
 
+        data = request.get_json()
+        print("es kommt von der minimongo",data)
+
         db = MiniMongo.MiniMongo()
-        entry = db.get_collection_by_id("61f01e4f350839ec84eb0986")
+        entry = db.get_collection_by_id(data["name"])
         print(entry)
         response = entry["experiment"]
 

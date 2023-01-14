@@ -31,19 +31,26 @@ class RequestHandler(Resource):
     def post(self):
 
         rbc_model = request.get_json()
-        print("retrobiocatmodel ist:", rbc_model)
         new = RetrobiocatBiocathubMapper(rbc_model)
-        
         payload = new.map_reactions_to_enzymes()
-
         db = MiniMongo.MiniMongo()
-        
-        
-        #db.get_collection()
         id = db.push_document(payload)
         print("die id ist:", id)
         res = json.dumps({"payload":payload, "id":str(id)})
         return res
 
+class LightCasRequest(Resource):
+
+    def post(self):
+        print("yeah!")
+        model = request.get_json()
+        #print(model["name"])
+
+        db = MiniMongo.MiniMongo()
+        id = db.push_document(model)
+        return id
+
 ns.add_resource(RequestHandler, "/")
+ns.add_resource(LightCasRequest, "/lightCas")
+    
 
