@@ -6,3 +6,4 @@ flask_cors==3.0.9
 pymongo == 3.11.0
 dnspython==2.1.0
 requests == 2.26.0
+pubchempy == 1.0.4
